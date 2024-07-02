@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #welcome-button {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #welcome-button:disabled {
+            background-color: #c0c0c0;
+            cursor: not-allowed;
+        }
+        #input-field {
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="input-field" placeholder="Enter the secret code">
+    <button id="welcome-button" disabled>Enter</button>
+    <script>
+        (function() {
+            function decodeBase64(encoded) {
+                return atob(encoded);
+            }
+
+            var encodedCode = "Ny8zLzIwMjQ=";  // '7/3/2024' in base64
+            var secretCode = decodeBase64(encodedCode);
+
+            var inputField = document.getElementById('input-field');
+            var welcomeButton = document.getElementById('welcome-button');
+
+            inputField.addEventListener('input', function() {
+                if (inputField.value === secretCode) {
+                    welcomeButton.disabled = false;
+                } else {
+                    welcomeButton.disabled = true;
+                }
+            });
+
+            welcomeButton.addEventListener('click', function() {
+                window.location.href = 'main.html';
+            });
+        })();
+    </script>
+</body>
+</html>
